@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Bay Harbour Butcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9ecec;--panel:#f7f8f8;--ink:#15191c;--mute:#5a6469;--line:#c5cccf;--red:#8a1420;--teal:#1d6b73;--hero:#15191c;--heroink:#f2f4f4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1315;--panel:#171c1f;--ink:#e8ecec;--mute:#93a0a5;--line:#2b3438;--red:#c9303f;--teal:#4fb0b9;--hero:#080a0b}}
+:root[data-theme="dark"]{--bg:#0f1315;--panel:#171c1f;--ink:#e8ecec;--mute:#93a0a5;--line:#2b3438;--red:#c9303f;--teal:#4fb0b9;--hero:#080a0b}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 "IBM Plex Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:14px}
+.logo{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:.01em}
+.logo i{display:inline-block;width:9px;height:13px;background:var(--red);border-radius:50% 50% 50% 50%/62% 62% 38% 38%;margin-right:8px;transform:translateY(1px)}
+.links{display:flex;gap:20px;font-size:.92rem;overflow-x:auto}
+.links a{text-decoration:none;color:var(--mute);white-space:nowrap}.links a:hover{color:var(--ink)}
+.tbtn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:4px;padding:6px 10px;font:inherit;font-size:.85rem;cursor:pointer}
+/* hero */
+.hero{background:var(--hero);color:var(--heroink);padding:88px 0 80px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,7vw,5.4rem);font-weight:700;letter-spacing:-.01em}
+.hero p{max-width:46ch;color:#b9c4c7;margin:22px 0 30px;font-size:1.05rem}
+.btn{display:inline-block;background:var(--red);color:#fff;border:0;padding:12px 22px;border-radius:3px;font:500 .95rem inherit;font-family:inherit;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid #55646a;color:var(--heroink);margin-left:10px}
+.slide{position:relative;width:100%;max-width:420px;margin:auto;aspect-ratio:3/1.15;background:linear-gradient(120deg,#d8eaec22,#ffffff14);border:1px solid #ffffff33;border-radius:4px;cursor:pointer;transform:rotate(-4deg);transition:transform .5s}
+.slide:hover,.slide.on{transform:rotate(-1deg) translateY(-6px)}
+.slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:22%;border-right:1px solid #ffffff33;background:#ffffff0d}
+.slide span{position:absolute;left:5%;top:14%;font-size:.6rem;color:#9fb0b4;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.08em}
+.drop{position:absolute;left:55%;top:32%;width:38px;height:38px;background:radial-gradient(circle at 35% 30%,#d94555,#7d0f1a 70%);border-radius:50%;box-shadow:0 0 0 6px #8a142022;transition:transform .5s}
+.slide.on .drop{transform:scale(2.3)}
+.hint{text-align:center;font-size:.78rem;color:#7d8c91;margin-top:14px}
+/* sections */
+section{padding:84px 0}
+.head{max-width:62ch;margin-bottom:38px}
+.head h2{font-size:clamp(2rem,4.4vw,3rem)}
+.head p{color:var(--mute);margin:12px 0 0}
+.rule{border-top:1px solid var(--line)}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.panel{background:var(--panel);border:1px solid var(--line);padding:26px;border-radius:2px}
+.panel h3{font-size:1.5rem;margin-bottom:8px}
+.panel p{margin:0;color:var(--mute)}
+.code li{margin-bottom:14px}.code{padding-left:20px;margin:0}
+.code b{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.2rem}
+/* seasons */
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:7px 14px;border-radius:99px;font:inherit;font-size:.88rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tog{margin-left:auto;font-size:.88rem;color:var(--mute);display:flex;gap:8px;align-items:center}
+.seasons{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.s{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--red);padding:20px;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.s small{color:var(--mute)}.s h3{font-size:1.45rem;margin:4px 0 8px}
+.s .ant{display:block;margin-top:10px;font-size:.88rem;color:var(--teal);font-weight:500}
+.spoil.hide{filter:blur(6px);user-select:none}
+.s p{margin:0;font-size:.92rem;color:var(--mute)}
+.s.open{border-top-color:var(--teal)}
+.more{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:.9rem}
+.s.open .more{display:block}
+/* people */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tab{border:0;border-bottom:2px solid transparent;background:none;color:var(--mute);padding:8px 10px;font:inherit;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ink);border-color:var(--red)}
+.person{display:grid;grid-template-columns:180px 1fr;gap:28px;align-items:start}
+.mono{aspect-ratio:1;background:var(--hero);color:var(--heroink);display:grid;place-items:center;font:700 3.6rem "Cormorant Garamond",Georgia,serif;border-radius:2px}
+.person h3{font-size:2rem}.person .role{color:var(--teal);font-weight:500;margin:4px 0 12px}
+/* timeline */
+.tl{border-left:2px solid var(--line);margin-left:6px}
+.tl div{position:relative;padding:0 0 28px 28px}
+.tl div::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;background:var(--red);border-radius:50%}
+.tl b{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.3rem}
+.tl p{margin:2px 0 0;color:var(--mute)}
+/* quiz */
+.quiz{max-width:680px}
+.q{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.6rem;margin:0 0 16px}
+.opt{display:block;width:100%;text-align:left;margin-bottom:10px;background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:12px 16px;font:inherit;cursor:pointer;border-radius:2px}
+.opt.ok{border-color:var(--teal);background:color-mix(in srgb,var(--teal) 18%,var(--panel))}
+.opt.no{border-color:var(--red);background:color-mix(in srgb,var(--red) 16%,var(--panel))}
+.prog{height:3px;background:var(--line);margin-bottom:20px}.prog i{display:block;height:100%;background:var(--red);width:0;transition:width .3s}
+/* form */
+form{display:grid;gap:14px;max-width:560px}
+label{font-size:.9rem;font-weight:500}
+input,textarea,select{width:100%;margin-top:5px;padding:11px 12px;background:var(--panel);color:var(--ink);border:1px solid var(--line);font:inherit;border-radius:2px}
+.err{color:var(--red);font-size:.82rem;min-height:1em;display:block}
+.ok-msg{color:var(--teal);font-weight:500}
+footer{background:var(--hero);color:#9fb0b4;padding:40px 0;font-size:.85rem}
+footer p{margin:6px 0;max-width:80ch}
+@media (max-width:760px){.hero .wrap,.grid2,.person{grid-template-columns:1fr}.links{display:none}.mono{max-width:130px}.tog{margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Main">
+<a class="logo" href="#top"><i></i>The Bay Harbour Butcher</a>
+<div class="links"><a href="#code">The Code</a><a href="#seasons">Seasons</a><a href="#people">Characters</a><a href="#timeline">Timeline</a><a href="#quiz">Quiz</a><a href="#contact">Contact</a></div>
+<button class="tbtn" id="theme" type="button" aria-label="Toggle colour theme">Theme</button>
+</nav></div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+<div>
+<h1>The Bay Harbour Butcher</h1>
+<p>An independent, formal companion to the <em>Dexter</em> series: the Code, the seasons, the people of Miami Metro, and the long shadow of one careful man.</p>
+<a class="btn" href="#seasons">Open the case files</a><a class="btn ghost" href="#quiz">Test your knowledge</a>
+</div>
+<div><div class="slide" id="slide" role="button" tabindex="0" aria-label="Examine the slide"><span>SPECIMEN 01</span><div class="drop"></div></div>
+<div class="hint">Select the slide to examine it.</div></div>
+</div></div>
+
+<section id="code"><div class="wrap">
+<div class="head"><h2>The Code</h2><p>At the heart of the series is a private moral framework, taught to Dexter Morgan by his adoptive father, Harry. It is a discipline first, and a justification second.</p></div>
+<div class="grid2">
+<div class="panel"><ol class="code">
+<li><b>Don't get caught.</b><br><span style="color:var(--mute)">Every other principle serves this one.</span></li>
+<li><b>Be certain.</b><br><span style="color:var(--mute)">A target must be guilty beyond any reasonable doubt.</span></li>
+<li><b>Stay disciplined.</b><br><span style="color:var(--mute)">Preparation, patience and a clean procedure.</span></li>
+</ol></div>
+<div class="panel"><h3>Why it endures</h3><p>The series asks the audience to weigh a tidy system against the damage it does to everyone close to it. The Code promises order; the seasons repeatedly show its cost.</p></div>
+</div></div></section>
+
+<section id="seasons" class="rule"><div class="wrap">
+<div class="head"><h2>Case files by season</h2><p>Filter by era and open any file. Plot details are hidden by default so newcomers can browse safely.</p></div>
+<div class="tools" role="group" aria-label="Filter seasons">
+<button class="chip" data-f="all" aria-pressed="true">All</button>
+<button class="chip" data-f="classic" aria-pressed="false">Original run</button>
+<button class="chip" data-f="revival" aria-pressed="false">Revival</button>
+<label class="tog"><input type="checkbox" id="spoil" style="width:auto;margin:0"> Reveal spoilers</label>
+</div>
+<div class="seasons" id="sgrid"></div>
+</div></section>
+
+<section id="people" class="rule"><div class="wrap">
+<div class="head"><h2>Personnel</h2><p>The people in and around Miami Metro Police Department.</p></div>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="panel person" id="person" role="tabpanel"></div>
+</div></section>
+
+<section id="timeline" class="rule"><div class="wrap">
+<div class="head"><h2>Broadcast timeline</h2><p>Release years of each chapter of the story.</p></div>
+<div class="tl">
+<div><b>2006</b><p>The series debuts on Showtime, adapted from Jeff Lindsay's novel <em>Darkly Dreaming Dexter</em>.</p></div>
+<div><b>2006–2013</b><p>Eight seasons follow Dexter from Miami Metro forensics to an uncertain end.</p></div>
+<div><b>2021</b><p><em>Dexter: New Blood</em> relocates the story to upstate New York.</p></div>
+<div><b>2025</b><p><em>Dexter: Resurrection</em> continues the story in a new chapter.</p></div>
+</div></div></section>
+
+<section id="quiz" class="rule"><div class="wrap">
+<div class="head"><h2>The examination</h2><p>Five questions. One attempt each.</p></div>
+<div class="quiz panel" id="quizbox"></div>
+</div></section>
+
+<section id="contact" class="rule"><div class="wrap">
+<div class="head"><h2>Correspondence</h2><p>Send a question, a correction, or a request for a topic we should cover.</p></div>
+<form id="form" novalidate>
+<div><label for="n">Full name</label><input id="n" autocomplete="name"><span class="err" id="en"></span></div>
+<div><label for="e">Email address</label><input id="e" type="email" autocomplete="email"><span class="err" id="ee"></span></div>
+<div><label for="t">Subject</label><select id="t"><option>General enquiry</option><option>Correction</option><option>Suggest a topic</option></select></div>
+<div><label for="m">Message</label><textarea id="m" rows="5"></textarea><span class="err" id="em"></span></div>
+<div><button class="btn" type="submit">Send message</button> <span class="ok-msg" id="done" role="status"></span></div>
+</form>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<p><b style="color:#e8ecec">The Bay Harbour Butcher</b> is an unofficial fan site. It is not affiliated with Showtime, Paramount or the creators of <em>Dexter</em>.</p>
+<p>All series titles and characters belong to their respective owners. Descriptions here are original summaries. Contains spoilers when revealed.</p>
+</div></footer>
+
+<script>
+const seasons=[
+{n:1,y:2006,g:"classic",t:"The Ice Truck Killer",a:"Brian Moser",s:"A killer leaves staged, bloodless puzzles for Miami Metro, and Dexter finds himself drawn into a game that is oddly personal."},
+{n:2,y:2007,g:"classic",t:"The Bay Harbor Butcher",a:"Sgt. James Doakes",s:"Dismembered remains are discovered offshore, and the media coins the title that gives this site its name while Doakes closes in."},
+{n:3,y:2008,g:"classic",t:"An Uneasy Alliance",a:"Miguel Prado",s:"Dexter meets a friend who shares his hobby, and learns how risky it is to trust someone with his secret."},
+{n:4,y:2009,g:"classic",t:"The Trinity Killer",a:"Arthur Mitchell",s:"A respected family man with a decades-old pattern forces Dexter to examine what a normal life could cost."},
+{n:5,y:2010,g:"classic",t:"Lumen",a:"Jordan Chase",s:"Dexter's path crosses that of a traumatised woman, and he must decide whether to mentor her or keep her at a distance."},
+{n:6,y:2011,g:"classic",t:"Doomsday",a:"Travis Marshall",s:"A string of apocalyptic tableaux draws Dexter toward faith, guilt and a new kind of adversary."},
+{n:7,y:2012,g:"classic",t:"Exposure",a:"Isaak Sirko",s:"A single discovery at the worst possible moment puts Dexter's secret in someone else's hands."},
+{n:8,y:2013,g:"classic",t:"The Final Chapter",a:"Oliver Saxon",s:"A psychiatrist who knows Dexter's past arrives, and the Code is tested one last time."},
+{n:9,y:2021,g:"revival",t:"New Blood",a:"Kurt Caldwell",s:"Years later, Dexter lives quietly under a new name until an old impulse and an unexpected visitor unsettle him."},
+{n:10,y:2025,g:"revival",t:"Resurrection",a:"Multiple",s:"The story resumes, revisiting what remains of Dexter's past and the consequences that never quite left."}];
+const label=n=>n<=8?"Season "+n:(n==9?"New Blood":"Resurrection");
+const grid=document.getElementById("sgrid"),spoil=document.getElementById("spoil");
+function drawS(f){grid.innerHTML="";seasons.filter(s=>f==="all"||s.g===f).forEach(s=>{
+const b=document.createElement("button");b.className="s";b.setAttribute("aria-expanded","false");
+b.innerHTML=`<small>${label(s.n)} · ${s.y}</small><h3>${s.t}</h3><span class="ant">Central figure: <span class="spoil ${spoil.checked?"":"hide"}">${s.a}</span></span><div class="more"><p class="spoil ${spoil.checked?"":"hide"}">${s.s}</p></div>`;
+b.onclick=()=>{const o=b.classList.toggle("open");b.setAttribute("aria-expanded",o)};grid.appendChild(b)})}
+let filt="all";drawS(filt);
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed","false"));c.setAttribute("aria-pressed","true");filt=c.dataset.f;drawS(filt)});
+spoil.onchange=()=>document.querySelectorAll(".spoil").forEach(e=>e.classList.toggle("hide",!spoil.checked));
+
+const ppl=[
+["Dexter Morgan","Forensic analyst, Miami Metro","A blood-spatter specialist with a pleasant public manner and a private code. Methodical, observant, and always rehearsing how a normal person would react."],
+["Debra Morgan","Detective, later Lieutenant","Dexter's adoptive sister. Direct, determined and fiercely loyal, she is the emotional counterweight to his detachment."],
+["Harry Morgan","Dexter's adoptive father","A respected officer who shaped Dexter's Code. Appears mostly through memory and imagination."],
+["James Doakes","Sergeant","An intense, watchful investigator whose instincts about Dexter make him a constant source of tension."],
+["Maria LaGuerta","Lieutenant, later Captain","A career-minded leader navigating politics and procedure, with a sharp eye for what does not add up."],
+["Angel Batista","Detective","A steady, good-humoured colleague and one of the team's most dependable presences."],
+["Vince Masuka","Forensic analyst","The department's irreverent lab specialist, known for blunt humour and real technical skill."]];
+const tabs=document.getElementById("tabs"),pbox=document.getElementById("person");
+function showP(i){[...tabs.children].forEach((t,j)=>t.setAttribute("aria-selected",i===j));const p=ppl[i];
+pbox.innerHTML=`<div class="mono" aria-hidden="true">${p[0].split(" ").map(w=>w[0]).join("")}</div><div><h3>${p[0]}</h3><div class="role">${p[1]}</div><p>${p[2]}</p></div>`}
+ppl.forEach((p,i)=>{const b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");b.textContent=p[0].split(" ")[0];b.onclick=()=>showP(i);tabs.appendChild(b)});showP(0);
+
+const qs=[
+["What is the name of Dexter's adoptive father?",["Harry","Miguel","Arthur","Isaak"],0],
+["Which season introduces the nickname that gives this site its name?",["Season 1","Season 2","Season 5","Season 8"],1],
+["What is Dexter's profession at Miami Metro?",["Coroner","Forensic blood-spatter analyst","Patrol officer","Prosecutor"],1],
+["In what year did the original series premiere?",["2004","2006","2009","2011"],1],
+["Which revival is set in the town of Iron Lake?",["Resurrection","New Blood","Season 4","Doomsday"],1]];
+const qb=document.getElementById("quizbox");let qi=0,sc=0;
+function qr(){if(qi>=qs.length){qb.innerHTML=`<div class="q">Result: ${sc} of ${qs.length}</div><p>${sc>=4?"A thorough reading of the file.":"Review the case files above and try again."}</p><button class="btn" id="rs">Retake</button>`;document.getElementById("rs").onclick=()=>{qi=0;sc=0;qr()};return}
+const [q,o,a]=qs[qi];qb.innerHTML=`<div class="prog"><i style="width:${qi/qs.length*100}%"></i></div><p class="q">${q}</p>`+o.map((x,i)=>`<button class="opt" data-i="${i}">${x}</button>`).join("");
+qb.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;qb.querySelectorAll(".opt").forEach(x=>x.disabled=true);
+qb.querySelectorAll(".opt")[a].classList.add("ok");if(i===a)sc++;else b.classList.add("no");setTimeout(()=>{qi++;qr()},1100)})}
+qr();
+
+const sl=document.getElementById("slide");sl.onclick=()=>sl.classList.toggle("on");
+sl.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();sl.classList.toggle("on")}};
+
+const f=document.getElementById("form");
+f.onsubmit=e=>{e.preventDefault();let ok=true;
+const c=(id,er,bad,msg)=>{const v=document.getElementById(id).value.trim();document.getElementById(er).textContent=bad(v)?msg:"";if(bad(v))ok=false};
+c("n","en",v=>v.length<2,"Enter your full name.");
+c("e","ee",v=>!/^\S+@\S+\.\S+$/.test(v),"Enter a valid email address, such as name@example.com.");
+c("m","em",v=>v.length<10,"Write at least 10 characters.");
+document.getElementById("done").textContent=ok?"Message prepared. Thank you.":"";
+if(ok)f.reset()};
+
+const th=document.getElementById("theme"),root=document.documentElement;
+th.onclick=()=>{const dark=getComputedStyle(root).getPropertyValue("--bg").trim()==="#0f1315";root.dataset.theme=dark?"light":"dark";try{localStorage.setItem("tbb-theme",root.dataset.theme)}catch(e){}};
+try{const s=localStorage.getItem("tbb-theme");if(s)root.dataset.theme=s}catch(e){}
+</script>
+</body>
+</html>
